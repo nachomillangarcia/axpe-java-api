@@ -41,6 +41,15 @@ pipeline {
                 }
             }
         }
+
+        stage('Unit Tests'){
+            steps{
+                container('maven'){
+                    sh 'mvn test -Dmaven.repo.local=$WORKSPACE/.m2/repository'
+                    sh 'rm -r $WORKSPACE/.m2/repository'
+                }
+            }
+        }
     }
 
 }
