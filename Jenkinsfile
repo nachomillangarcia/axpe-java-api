@@ -10,16 +10,16 @@ pipeline {
                 spec:
                 serviceAccount: jenkins
                 containers:
-                  - name: maven
-                    image: maven:3.9.9-eclipse-temurin-17
-                    command:
-                    - cat
-                    tty: true
-                  - name: busybox
-                    image: busybox
-                    command:
-                    - cat
-                    tty: true
+                    - name: maven
+                      image: maven:3.9.9-eclipse-temurin-17
+                      command:
+                      - cat
+                      tty: true
+                    - name: busybox
+                      image: busybox
+                      command:
+                      - cat
+                      tty: true
                 '''
             retries 3
         }
