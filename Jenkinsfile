@@ -20,6 +20,10 @@ pipeline {
                       command:
                       - cat
                       tty: true
+                    - name: jnlp
+                      image: image-registry.openshift-image-registry.svc:5000/openshift/jenkins-agent-base:latest
+                      args: ['\${computer.jnlpmac}', '\${computer.name}']
+                      workDir: /tmp
                 '''
             retries 3
         }
@@ -47,6 +51,14 @@ pipeline {
                 container('maven'){
                     sh 'mvn test -Dmaven.repo.local=$WORKSPACE/.m2/repository'
                     sh 'rm -r $WORKSPACE/.m2/repository'
+                }
+            }
+        }
+        stage('Trigger docker build') {
+            steps {
+                container("jnlp") {
+                    sh "ls -al"
+                    sh "oc start-build -F java-api --from-dir=`pwd`"
                 }
             }
         }
