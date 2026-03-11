@@ -8,8 +8,8 @@ pipeline {
                 labels:
                     some-label: some-label-value
                 spec:
-                serviceAccount: jenkins
-                containers:
+                    serviceAccount: jenkins
+                    containers:
                     - name: maven
                       image: maven:3.9.9-eclipse-temurin-17
                       command:
