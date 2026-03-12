@@ -1,4 +1,4 @@
-FROM maven:3.9.6-eclipse-temurin-17 AS build
+FROM docker.io/maven:3.9.6-eclipse-temurin-17 AS build
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ RUN mvn package && \
     cp target/java-server-*-jar-with-dependencies.jar app.jar
 
 
-FROM eclipse-temurin:17-jre
+FROM docker.io/eclipse-temurin:17-jre
 
 WORKDIR /app
 
